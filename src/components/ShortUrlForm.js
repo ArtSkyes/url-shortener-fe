@@ -1,32 +1,56 @@
 import React, { useState } from 'react';
+import { createShortUrl } from '../api/shortUrlApi';
 
-const ShortUrlForm = ({ onSubmit }) => {
-  const [fullUrl, setFullUrl] = useState('');
+const ShortUrlForm = ({ onUrlCreated }) => {
+  const [url, setUrl] = useState('');
+  const [error, setError] = useState('');
+  const [shortenedUrl, setShortenedUrl] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit(fullUrl);
-    setFullUrl('');
+    setError('');
+    setShortenedUrl('');
+
+    try {
+      const newUrl = await createShortUrl(url);
+      onUrlCreated(newUrl);
+      setUrl('');
+      const shortUrl = `http://localhost:3000/${newUrl.short_code}`;
+      setShortenedUrl(shortUrl);
+    } catch (error) {
+      setError(error.message || 'An error occurred');
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-8">
-      <div className="flex">
+    <div className="mb-8">
+      <form onSubmit={handleSubmit} className="mb-4">
         <input
           type="text"
-          value={fullUrl}
-          onChange={(e) => setFullUrl(e.target.value)}
-          placeholder="Enter a URL"
-          className="flex-grow border border-gray-300 rounded-l px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          placeholder="Enter URL to shorten"
+          className="w-full p-2 border border-sky rounded-md focus:outline-none focus:ring-2 focus:ring-ocean"
         />
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-r"
-        >
-          Shorten
+        <button type="submit" className="mt-2 px-4 py-2 bg-ocean text-white rounded-md hover:bg-night transition-colors duration-300">
+          Shorten URL
         </button>
-      </div>
-    </form>
+      </form>
+      {error && <p className="mt-2 text-red-500">{error}</p>}
+      {shortenedUrl && (
+        <div className="mt-4 p-4 bg-sand rounded-md">
+          <p className="font-semibold text-ocean">Shortened URL:</p>
+          <a
+            href={shortenedUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sky hover:text-night break-all"
+          >
+            {shortenedUrl}
+          </a>
+        </div>
+      )}
+    </div>
   );
 };
 

@@ -1,74 +1,56 @@
-<<<<<<< HEAD
-# url-shortener-fe
-=======
-# Getting Started with Create React App
+# URL Shortener Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This URL shortener is a full-stack web application built with a Ruby on Rails backend and a React frontend. It provides a simple and efficient way to shorten long URLs and track their usage.
 
-In the project directory, you can run:
+### Key Features
 
-### `npm start`
+- Shorten long URLs to easily shareable short links
+- View the top 100 most accessed shortened URLs
+- Display analytics including click count and creation date for each shortened URL
+- Responsive design for both desktop and mobile devices
+- Custom color scheme and modern UI
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Algorithm
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The core algorithm for URL shortening involves the following steps:
 
-### `npm test`
+1. **URL Submission**
+   - User submits a long URL through the frontend form
+   - Frontend sends a POST request to the Rails backend
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. **URL Validation**
+   - Backend validates the submitted URL using a regex pattern
+   - If invalid, an error is returned to the frontend
 
-### `npm run build`
+3. **Short Code Generation**
+   - For valid and new URLs, a unique short code is generated
+   - Short code is based on the database ID of the URL entry, encoded to base 62
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. **Database Storage**
+   - Long URL, short code, and initial click count (0) are stored in the database
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+5. **Response to Frontend**
+   - Backend sends the short code and other URL details back to the frontend
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+6. **Display to User**
+   - Frontend displays the new shortened URL to the user
 
-### `npm run eject`
+7. **URL Redirection**
+   - When a shortened URL is visited, backend looks up the corresponding long URL
+   - Click count for that URL is incremented
+   - User is redirected to the original long URL
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+8. **Top 100 List**
+   - Backend maintains a list of the top 100 most accessed URLs
+   - List is updated each time a URL is accessed
+   - Frontend can request and display this list
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Architecture
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- RESTful API principles for frontend-backend communication
+- React hooks (useState, useEffect) for state management and side effects
+- Tailwind CSS for responsive and modern UI design
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
->>>>>>> 2a64e99 (Initial commit)
+This architecture allows for a scalable, maintainable, and user-friendly URL shortening service.

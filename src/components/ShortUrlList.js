@@ -14,19 +14,34 @@ const ShortUrlList = ({ urls }) => {
         </thead>
         <tbody>
           {urls.map((url, index) => (
-            <tr key={url.id} className={index % 2 === 0 ? 'bg-sand bg-opacity-25' : 'bg-white'}>
+            <tr
+              key={url.id}
+              className={index % 2 === 0 ? 'bg-sand bg-opacity-25' : 'bg-white'}
+            >
               <td className="border px-4 py-2 text-center">{index + 1}</td>
               <td className="border px-4 py-2 text-center">
-                <a href={`http://localhost:3000/${url.short_code}`} target="_blank" rel="noopener noreferrer" className="text-sky hover:text-night">
+                <a
+                  href={`http://localhost:3000/${url.short_code}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sky hover:text-night"
+                >
                   {url.short_code}
                 </a>
               </td>
               <td className="border px-4 py-2">
-                <a href={url.full_url} target="_blank" rel="noopener noreferrer" className="text-sky hover:text-night truncate block max-w-xs">
+                <a
+                  href={url.full_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sky hover:text-night truncate block max-w-xs"
+                >
                   {url.full_url}
                 </a>
               </td>
-              <td className="border px-4 py-2 text-center">{url.click_count}</td>
+              <td className="border px-4 py-2 text-center">
+                {url.click_count}
+              </td>
             </tr>
           ))}
         </tbody>

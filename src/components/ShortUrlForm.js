@@ -32,7 +32,10 @@ const ShortUrlForm = ({ onUrlCreated }) => {
           placeholder="Enter URL to shorten"
           className="w-full p-2 border border-sky rounded-md focus:outline-none focus:ring-2 focus:ring-ocean"
         />
-        <button type="submit" className="mt-2 px-4 py-2 bg-ocean text-white rounded-md hover:bg-night transition-colors duration-300">
+        <button
+          type="submit"
+          className="mt-2 px-4 py-2 bg-ocean text-white rounded-md hover:bg-night transition-colors duration-300"
+        >
           Shorten URL
         </button>
       </form>

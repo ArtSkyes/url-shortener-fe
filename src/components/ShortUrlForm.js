@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { createShortUrl } from '../api/shortUrlApi';
+import { config } from '../api/config';
 
 const ShortUrlForm = ({ onUrlCreated }) => {
   const [url, setUrl] = useState('');
@@ -15,7 +16,7 @@ const ShortUrlForm = ({ onUrlCreated }) => {
       const newUrl = await createShortUrl(url);
       onUrlCreated(newUrl);
       setUrl('');
-      const shortUrl = `http://localhost:3000/${newUrl.short_code}`;
+      const shortUrl = `${config.API_URL}/${newUrl.short_code}`;
       setShortenedUrl(shortUrl);
     } catch (error) {
       setError(error.message || 'An error occurred');

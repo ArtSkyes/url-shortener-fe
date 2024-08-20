@@ -1,4 +1,5 @@
 import React from 'react';
+import { config } from '../api/config';
 
 const ShortUrlList = ({ urls }) => {
   return (
@@ -21,7 +22,7 @@ const ShortUrlList = ({ urls }) => {
               <td className="border px-4 py-2 text-center">{index + 1}</td>
               <td className="border px-4 py-2 text-center">
                 <a
-                  href={`http://localhost:3000/${url.short_code}`}
+                  href={`${config.API_URL}/${url.short_code}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sky hover:text-night"
